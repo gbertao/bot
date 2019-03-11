@@ -34,7 +34,7 @@ class Disc:
         tree = html.fromstring(page_disc.content)
 
         cred = tree.xpath("//div[@class='row disciplina']//span[@class='label label-primary']/text()")
-        ementa = tree.xpath("//div[@class='row disciplina']//div[class='col-md-6']//p/text()").extract()[1]
+        ementa = tree.xpath("//div[@class='row disciplina']//div[@class='col-md-6']//p/text()")[1]
         
 
         return (cred, ementa)
@@ -42,4 +42,4 @@ class Disc:
 
 if __name__ == "__main__":
     a = Disc("MC102")
-    a.crawl()
+    print(a.crawl())
