@@ -29,7 +29,7 @@ class Disc:
             return "error"
 
         # Disc
-        page_disc = requests.get(disc)
+        page_disc = requests.get(disc_url)
 
         tree = html.fromstring(page_disc.content)
 
