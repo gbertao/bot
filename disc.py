@@ -14,7 +14,14 @@ class Disc:
 
         tree = html.fromstring(page.content)
         
-        disc = tree.xpath("//h4[@class='ss-result__title']//a/@href")[0]
+        disc = tree.xpath("//h4[@class='ss-result__title']//a/@href")
+
+
+        for url in disc:
+            if url.find("caderno-de-horarios") > 0:
+                disc_url = url
+                break
+
 
         # Disc
         page_disc = requests.get(disc)
@@ -23,7 +30,9 @@ class Disc:
 
         cred = tree.xpath("//div[@class='row disciplina']//span[@class='label label-primary']/text()")
         ementa = tree.xpath("//div[@class='row disciplina']//div[class='col-md-6']//p/text()").extract()[1]
-        print(ementa)
+        
+
+        return (cred, ementa)
 
 
 if __name__ == "__main__":
