@@ -16,12 +16,17 @@ class Disc:
         
         disc = tree.xpath("//h4[@class='ss-result__title']//a/@href")
 
+        if not disc:
+            return "error"
 
+        disc_url = None
         for url in disc:
             if url.find("caderno-de-horarios") > 0:
                 disc_url = url
                 break
 
+        if disc_url == None:
+            return "error"
 
         # Disc
         page_disc = requests.get(disc)
