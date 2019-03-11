@@ -1,18 +1,14 @@
 {
-    "name": "bot",
-    "description": "",
+    "name": "Rich-Cards-Bot",
+    "secretKey": "",
     "services": [
         {
-            "type": "endpoint",
             "appId": "",
+            "id": "http://localhost:9000",
+            "type": "endpoint",
             "appPassword": "",
             "endpoint": "http://localhost:9000",
-            "id": "272ec270-4402-11e9-8018-7754e8400bb1",
-            "name": "http://localhost:9000"
+            "name": "Rich-Cards-Bot"
         }
-    ],
-    "padlock": "",
-    "version": "2.0",
-    "overrides": null,
-    "path": "C:\\Users\\João Pedro\\Desktop\\bot\\bot.bot"
+    ]
 }
