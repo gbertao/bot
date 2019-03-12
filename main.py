@@ -5,7 +5,7 @@
 This sample shows how to use different types of rich cards.
 """
 
-
+import disc
 from aiohttp import web
 from botbuilder.schema import (Activity, ActivityTypes,
                                AnimationCard, AudioCard, Attachment,
@@ -37,13 +37,11 @@ conversation_state = ConversationState(memory)
 # ADAPTER.use(user_state)
 ADAPTER.use(conversation_state)
 
-def create_thumbnail_card() -> Attachment:
-    card = ThumbnailCard(title="BotFramework Thumbnail Card", subtitle="Your bots — wherever your users are talking",
-                         text="Build and connect intelligent bots to interact with your users naturally wherever"
-                              " they are, from text/sms to Skype, Slack, Office 365 mail and other popular services.",
+def create_thumbnail_card(cred, ementa) -> Attachment:
+    card = ThumbnailCard(title="créditos: " + str(cred), subtitle="",
+                         text=ementa,
                          images=[],
-                         buttons=[CardAction(type=ActionTypes.open_url, title="Get Started",
-                                             value="https://docs.microsoft.com/en-us/azure/bot-service/")])
+                         buttons=[])
     return CardFactory.thumbnail_card(card)
 
 
@@ -82,7 +80,9 @@ async def handle_message(context: TurnContext) -> web.Response:
 
 async def card_response(context: TurnContext) -> web.Response:
     response = context.activity.text.strip()
-    card = create_thumbnail_card()
+    obj = disc.Disc(response)
+    cred, ementa = obj.crawl()
+    card = create_thumbnail_card(cred, ementa)
     response = await create_reply_activity(context.activity, '', card)
     await context.send_activity(response)
     return web.Response(status=200)
